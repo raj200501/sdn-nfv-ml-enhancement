@@ -1,32 +1,7 @@
 Leveraging Machine Learning for Enhanced Decision-Making in Software-Defined Networking and Network Function Virtualization
 This repository contains the implementation of the research paper "Leveraging Machine Learning for Enhanced Decision-Making in Software-Defined Networking and Network Function Virtualization." The repository includes scripts for synthetic data generation, machine learning model training, evaluation, and necessary configurations.
 
-Repository Structure
 
-sdn-nfv-ml-enhancement/
-├── data/
-│   ├── generate_synthetic_data.py
-│   ├── traffic_data.csv
-│   ├── anomaly_data.csv
-│   ├── performance_metrics.csv
-├── models/
-│   ├── lstm_model.py
-│   ├── cnn_model.py
-│   ├── dqn_model.py
-├── notebooks/
-│   ├── LSTM_Traffic_Prediction.ipynb
-│   ├── CNN_Anomaly_Detection.ipynb
-│   ├── DQN_Network_Optimization.ipynb
-├── results/
-│   ├── traffic_prediction_results.png
-│   ├── anomaly_detection_results.png
-│   ├── resource_utilization_results.png
-├── utils/
-│   ├── data_preprocessing.py
-│   ├── model_utils.py
-├── requirements.txt
-├── README.md
-└── main.py
 Overview
 The goal of this project is to leverage machine learning techniques to enhance decision-making processes in software-defined networking (SDN) and network function virtualization (NFV). The project is divided into three main components:
 
