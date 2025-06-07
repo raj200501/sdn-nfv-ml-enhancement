@@ -5,7 +5,7 @@
 This repository contains the implementation of the research project titled **"Leveraging Machine Learning for Enhanced Decision-Making in Software-Defined Networking and Network Function Virtualization."** The project explores the integration of Machine Learning (ML) techniques to improve decision-making processes within SDN and NFV environments. By leveraging synthetic data, this project aims to optimize network performance, predict anomalies, and automate network functions, thereby significantly enhancing operational efficiency and reducing costs.
 
 ## Table of Contents
-
+ 
 - [Project Overview](#project-overview)
 - [Table of Contents](#table-of-contents)
 - [Directory Structure](#directory-structure)
