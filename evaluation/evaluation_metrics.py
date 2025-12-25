@@ -1,5 +1,11 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 def evaluate_regression_model(y_true, y_pred):
     mae = mean_absolute_error(y_true, y_pred)

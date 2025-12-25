@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
 import pandas as pd
 import numpy as np
 from keras.models import Sequential
@@ -27,6 +32,19 @@ def train_model(model, X_train, y_train, epochs=10, batch_size=64):
     model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, validation_split=0.2)
     model.save('models/traffic_prediction/lstm_model.h5')
     print("LSTM model trained and saved.")
+
+def train_lstm_model(data, epochs=None, batch_size=None):
+    X, y = data.iloc[:, :-1], data.iloc[:, -1]
+    X, _ = preprocess_data(X)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
+    X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
+    lstm_model = create_lstm_model((X_train.shape[1], 1))
+    epochs = epochs or int(os.getenv("SDN_NFV_LSTM_EPOCHS", "1"))
+    batch_size = batch_size or int(os.getenv("SDN_NFV_LSTM_BATCH", "32"))
+    train_model(lstm_model, X_train, y_train, epochs=epochs, batch_size=batch_size)
+    evaluate_model(lstm_model, X_test, y_test)
+    return lstm_model
 
 def evaluate_model(model, X_test, y_test):
     y_pred = model.predict(X_test)

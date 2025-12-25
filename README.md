@@ -160,4 +160,41 @@ Affiliation: Department of Electrical Engineering, Virginia Polytechnic Institut
 
 css
 
+## ✅ Verified Quickstart
+
+The commands below were run in a clean environment to validate the pipeline end-to-end.
+
+```bash
+pip install -r requirements.txt
+./scripts/run_pipeline.sh
+```
+
+For a faster training loop (useful in CI), you can also run:
+
+```bash
+./scripts/smoke_test.sh
+```
+
+### Optional Environment Variables
+
+These environment variables control training duration:
+
+- `SDN_NFV_LSTM_EPOCHS` (default: 1)
+- `SDN_NFV_CNN_EPOCHS` (default: 1)
+- `SDN_NFV_DQN_EPISODES` (default: 5)
+- `SDN_NFV_DQN_STEPS` (default: 25)
+
+## Troubleshooting
+
+**`requests` connection errors when running deployment scripts**
+
+The deployment scripts attempt to reach a controller/orchestrator on `localhost:8080`. If none is running, they fall back to simulated state and print a warning. This is expected for local runs without an SDN/NFV stack.
+
+**Empty or missing CSV files**
+
+If `data/*.csv` files are missing or empty, the data generation and cleaning steps create placeholder datasets so the pipeline can proceed.
+
+**Headless environments and plots**
+
+`evaluation/results_visualization.py` uses a non-interactive matplotlib backend and saves a plot to `data/visualization_outputs.png`.
 
