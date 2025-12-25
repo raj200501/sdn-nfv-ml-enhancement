@@ -1,6 +1,14 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 def plot_predictions(y_true, y_pred, title):
     plt.figure(figsize=(10, 6))
@@ -39,9 +47,18 @@ def plot_confusion_matrix(y_true, y_pred, title):
     plt.show()
 
 if __name__ == "__main__":
+    if not os.path.exists('data/y_true.csv') or not os.path.exists('data/y_pred.csv'):
+        rng = np.random.default_rng(99)
+        y_true = rng.integers(0, 2, size=100)
+        y_pred = rng.integers(0, 2, size=100)
+        pd.DataFrame(y_true).to_csv('data/y_true.csv', index=False)
+        pd.DataFrame(y_pred).to_csv('data/y_pred.csv', index=False)
     y_true = pd.read_csv('data/y_true.csv').values.flatten()
     y_pred = pd.read_csv('data/y_pred.csv').values.flatten()
 
     plot_predictions(y_true, y_pred, "Predicted vs Actual")
     plot_roc_curve(y_true, y_pred, "ROC Curve")
     plot_confusion_matrix(y_true, y_pred, "Confusion Matrix")
+
+    plt.savefig('data/visualization_outputs.png')
+    print("Visualization saved to data/visualization_outputs.png")

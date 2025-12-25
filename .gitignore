@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+*.h5
+data/*_features.csv
+data/visualization_outputs.png
+data/y_true.csv
+data/y_pred.csv

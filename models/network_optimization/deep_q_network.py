@@ -1,9 +1,15 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
 import numpy as np
 import random
 import tensorflow as tf
 from collections import deque
 from keras.models import Sequential
 from keras.layers import Dense
+from models.network_optimization.environment import NetworkEnvironment
 
 class DQNAgent:
     def __init__(self, state_size, action_size):
@@ -18,6 +24,14 @@ class DQNAgent:
         self.model = self._build_model()
 
     def _build_model(self):
+        model = Sequential()
+        model.add(Dense(24, input_dim=self.state_size, activation='relu'))
+        model.add(Dense(24, activation='relu'))
+        model.add(Dense(self.action_size, activation='linear'))
+        model.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(learning_rate=self.learning_rate))
+        return model
+
+    def _build_model_legacy(self):
         model = Sequential()
         model.add(Dense(24, input_dim=self.state_size, activation='relu'))
         model.add(Dense(24, activation='relu'))
